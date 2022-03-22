@@ -1,0 +1,29 @@
+function calculateDesktopOffset(length) {
+    return '-' + (length / 2) * Math.tan(15 * Math.PI / 180) + 'px';
+}
+function makeOvalOverlay() {
+    var section = document.getElementById("section");
+    var bannerText = section.getElementsByClassName('bannerText')[0];
+    var bannerImage = section.getElementsByClassName('bannerImage')[0];
+    var oval = section.getElementsByClassName('oval')[0];
+    var $height = bannerText.clientHeight;
+    var $width = bannerText.clientWidth;
+    if (window.innerWidth < 768) {
+        bannerImage.style.height = $width / 1.4 + 'px';
+        oval.style.width = $width * 3 + 'px';
+        oval.style.height = $width * 3 + 'px';
+        oval.style.right = '-' + $width * 0.76 + 'px';
+        oval.style.top = '-' + $width * 0.2 + 'px'; 
+        } else {
+        bannerImage.style.height = 'auto';
+        oval.style.width = $height * 2 + 'px';
+        oval.style.height = $height * 2 + 'px';
+        oval.style.right = calculateDesktopOffset($height);
+        oval.style.top = "-50%";
+    }   
+}
+  
+makeOvalOverlay();
+window.addEventListener('resize', function(){
+    makeOvalOverlay();
+});
